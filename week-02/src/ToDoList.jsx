@@ -1,20 +1,58 @@
-export default function ToDoList({ firstName, lastName, todos }) {
-  let h1Style = { color: "deeppink", backgroundColor: "white" };
+import { useState, useEffect } from "react";
+import NewTodoForm from "./NewTodoForm";
+import ToDoItem from "./ToDoItem";
 
-  function handleAdd(event) {
-    console.log("we should add a new item");
+function loadTodos() {
+  const saved = localStorage.getItem("todos");
+  return saved ? JSON.parse(saved) : [];
+}
+
+export default function ToDoList({ firstName }) {
+  const [todoList, setTodoList] = useState(loadTodos);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todoList));
+  }, [todoList]);
+
+  function handleAdd(text) {
+    const newToDo = {
+      id: crypto.randomUUID(),
+      text: text,
+      done: false,
+    };
+    setTodoList([...todoList, newToDo]);
+  }
+  function handleToggle(id) {
+    setTodoList(
+      todoList.map((todo) =>
+        todo.id === id ? { ...todo, done: !todo.done } : todo,
+      ),
+    );
+  }
+  function handleRemove(id) {
+    setTodoList(todoList.filter((todo) => todo.id !== id));
   }
 
   return (
     <>
-      <h1 style={h1Style}>To Do List for {firstName}</h1>
-      <ul>
-        {todos.map((elem, index) => (
-          <li key={index}>{elem}</li>
-        ))}
-      </ul>
+      <h1>To Do List for {firstName}</h1>
 
-      <button onClick={handleAdd}>Add New Task</button>
+      <NewTodoForm onAdd={handleAdd} />
+
+      {todoList.length === 0 ? (
+        <p>Nothing to do. Enjoy your day!</p>
+      ) : (
+        <ul>
+          {todoList.map((todo) => (
+            <ToDoItem
+              key={todo.id}
+              todo={todo}
+              onToggle={handleToggle}
+              onRemove={handleRemove}
+            />
+          ))}
+        </ul>
+      )}
     </>
   );
 }
