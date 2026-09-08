@@ -7,11 +7,11 @@ function loadTodos() {
   return saved ? JSON.parse(saved) : [];
 }
 
-export default function ToDoList({ firstName }) {
+export default function ToDoList({ listTitle }) {
   const [todoList, setTodoList] = useState(loadTodos);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todoList));
+    localStorage.setItem(`todolist:${listTitle}`, JSON.stringify(todoList));
   }, [todoList]);
 
   function handleAdd(text) {
@@ -34,11 +34,10 @@ export default function ToDoList({ firstName }) {
   }
 
   return (
-    <>
-      <h1>To Do List for {firstName}</h1>
+    <div className="todo-body">
+      <h1>{listTitle}</h1>
 
       <NewTodoForm onAdd={handleAdd} />
-
       {todoList.length === 0 ? (
         <p>Nothing to do. Enjoy your day!</p>
       ) : (
@@ -53,6 +52,6 @@ export default function ToDoList({ firstName }) {
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }
