@@ -1,5 +1,5 @@
 * {
-  font-family: "Lato";
+  font-family: "Lato", sans-serif;
 }
 
 body {
@@ -17,10 +17,11 @@ body {
   box-sizing: border-box;
   background-color: white;
   width: 100%;
-  max-width: 560px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 0.5rem 1rem;
   border-radius: 16px;
+  box-shadow: 0 0 4rem #0000001f;
 }
 
 button {
@@ -31,15 +32,16 @@ button {
 }
 
 #add-btn {
-  border-radius: 0.25rem;
   border: 1px solid #005cd4;
   background: #1b7bfa;
   color: white;
 }
 
 ul {
-  padding-left: 2rem;
+  padding-left: 0.5rem;
+  list-style-type: none;
 }
+
 ul > li {
   margin: 0.5rem 0;
 }
