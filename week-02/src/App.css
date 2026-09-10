@@ -1,10 +1,11 @@
+/* this is mobile view */
+
 * {
   font-family: "Lato", sans-serif;
 }
 
 body {
-  background-color: #ffd391;
-  padding: 16px;
+  background-color: white;
 }
 
 .main-inner {
@@ -21,12 +22,11 @@ body {
   margin: 0 auto;
   padding: 0.5rem 1rem;
   border-radius: 16px;
-  box-shadow: 0 0 4rem #0000001f;
 }
 
 button {
   padding: 0.375rem 0.5rem;
-  border-radius: 0.25rem;
+  border-radius: 1rem;
   border: 1px solid #b4b4b4;
   background: #d5d5d5;
 }
@@ -44,4 +44,14 @@ ul {
 
 ul > li {
   margin: 0.5rem 0;
+}
+
+@media (min-width: 560px) {
+  /* this is desktop view*/
+  body {
+    background-color: #ffd391;
+  }
+  .todo-body {
+    box-shadow: 0 0 4rem #0000001f;
+  }
 }
