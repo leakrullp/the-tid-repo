@@ -1,36 +1,11 @@
-# todo-26
+# ToDo list template as of week 4
 
-The reference to-do app for **Technical Interaction Design**, ITU, Autumn 2026 — built
-live, in the lectures. Your team forks it in week 3.
+This is a possible solution to the exercise from week 4. It can also serve as a basis for week 5's exercise if you didn't make it this far.
 
-## Getting the app from a particular lecture
+For this app to work it is required that:
 
-Every lecture ends with a tag, so you can check out the app exactly as it stood when you
-walked out of the room:
-
-```bash
-git clone https://github.com/itu-tid/todo-26.git
-cd todo-26
-git checkout week-01
-npm install
-npm run dev
-```
-
-`git checkout main` takes you back to the latest, and `git tag` lists every week that
-exists so far. If you switch between tags, run `npm install` again — the dependencies
-change as the course goes on.
-
-### What is in week-01
-
-Components, props, `children`, and rendering a list with keys. **Add** is wired up but only
-logs — making it actually add something needs state, which is lecture 2.
-
-The commits inside a week are the live coding as it happened, warts and dead ends
-included. The **tag** is applied afterwards, once it has been tidied — so the commits show
-you the process and the tag shows you the version worth reading.
-
-## The notes
-
-Written up at [itu-tid.github.io](https://github.com/itu-tid/itu-tid.github.io#readme),
-with each week also bundled as a PDF at
-[itu-tid.github.io/lecture-notes-pdf](https://itu-tid.github.io/lecture-notes-pdf/).
+- You have an account on Back4App and have 1 app
+- Inside that app you can find the **App ID** and the **JavaScipt Key**
+- You go into the file `App.jsx` and replace the placeholders inside `Parse.initialize()` with the values of your app
+- You need to have a Class in your b4a database called **TodoItem** with two fields `text` of type String and `done` of type Boolean.
+- Go to your **TodoItem** class and click the three dots > Security > Class Level Permission and check off _Read_ and _Write_ in the public section.
