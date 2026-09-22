@@ -8,11 +8,6 @@ import {
   deleteTodo,
 } from "../service/todoService";
 
-function loadTodos() {
-  const saved = localStorage.getItem("todos");
-  return saved ? JSON.parse(saved) : [];
-}
-
 export default function ToDoList({ listTitle }) {
   const [todoList, setTodoList] = useState([]);
 
