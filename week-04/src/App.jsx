@@ -1,7 +1,6 @@
 import "./App.css";
 import ToDoList from "./ToDoList.jsx";
 import Parse from "parse";
-import { useEffect } from "react";
 
 Parse.initialize(
   "gIfWHFPdXe70K1Tvg0ma0892ovyFKbaKbgwAHjVU",
