@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import NewTodoForm from "./NewTodoForm";
 import ToDoItem from "./ToDoItem";
+import {
+  fetchTodos,
+  createTodo,
+  setTodoDone,
+  deleteTodo,
+} from "../service/todoService";
 
 function loadTodos() {
   const saved = localStorage.getItem("todos");
@@ -8,29 +14,29 @@ function loadTodos() {
 }
 
 export default function ToDoList({ listTitle }) {
-  const [todoList, setTodoList] = useState(loadTodos);
+  const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem(`todolist:${listTitle}`, JSON.stringify(todoList));
-  }, [todoList]);
+    async function load() {
+      setTodoList(await fetchTodos());
+    }
+    load();
+  }, []);
 
-  function handleAdd(text) {
-    const newToDo = {
-      id: crypto.randomUUID(),
-      text: text,
-      done: false,
-    };
+  async function handleAdd(text) {
+    const newToDo = await createTodo(text);
     setTodoList([...todoList, newToDo]);
   }
-  function handleToggle(id) {
+  async function handleToggle(id) {
+    const todo = todoList.find((t) => t.id === id);
+    await setTodoDone(id, !todo.done);
     setTodoList(
-      todoList.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo,
-      ),
+      todoList.map((t) => (t.id === id ? { ...t, done: !t.done } : t)),
     );
   }
-  function handleRemove(id) {
-    setTodoList(todoList.filter((todo) => todo.id !== id));
+  async function handleRemove(idToDelete) {
+    await deleteTodo(idToDelete);
+    setTodoList(todoList.filter((todo) => todo.id !== idToDelete));
   }
 
   return (

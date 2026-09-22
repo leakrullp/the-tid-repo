@@ -1,6 +1,6 @@
 import Parse from "parse";
 
-const TodoItem = Parse.Object.extend("ToDoItem");
+const TodoItem = Parse.Object.extend("TodoItem");
 
 function toPlainObject(parseObject) {
   return {
@@ -11,7 +11,7 @@ function toPlainObject(parseObject) {
 }
 
 export async function fetchTodos() {
-  const query = Parse.Query(TodoItem);
+  const query = new Parse.Query(TodoItem);
   query.ascending("createdAt");
   const result = await query.find();
   return result.map(toPlainObject);

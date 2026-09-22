@@ -1,18 +1,18 @@
 import "./App.css";
 import ToDoList from "./ToDoList.jsx";
 import Parse from "parse";
+import { useEffect } from "react";
 
 Parse.initialize(
-  "mNr5YjFHfkcuYmk9UtedVpiwaUHMUGapCcIH3Cvr",
-  "2Sz4QJza9aEPfY8XZaGMflw6RR9UpuMFG0DIJl8D",
+  "gIfWHFPdXe70K1Tvg0ma0892ovyFKbaKbgwAHjVU",
+  "rCQCXMFLdKSFNbfNuUaYYw1wceh6kZdtuTAAq6nI",
 );
 Parse.serverURL = "https://parseapi.back4app.com";
 
 function App() {
   return (
     <div className="main-inner">
-      <ToDoList listTitle={"Preparing for TID"} />
-      <ToDoList listTitle={"Thesis"} />
+      <ToDoList listTitle={"My Todo List"} />
     </div>
   );
 }
