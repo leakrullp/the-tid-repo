@@ -8,18 +8,22 @@ import {
   deleteTodo,
 } from "../service/todoService";
 
-export default function ToDoList({ listTitle }) {
+export default function ToDoList({ listTitle, userId }) {
   const [todoList, setTodoList] = useState([]);
 
   useEffect(() => {
     async function load() {
-      setTodoList(await fetchTodos());
+      const todos = await fetchTodos();
+
+      const userTodos = todos.filter((todo) => todo.owner === userId);
+
+      setTodoList(userTodos);
     }
     load();
-  }, []);
+  }, [userId]);
 
   async function handleAdd(text) {
-    const newToDo = await createTodo(text);
+    const newToDo = await createTodo(text, userId);
     setTodoList([...todoList, newToDo]);
   }
   async function handleToggle(id) {
