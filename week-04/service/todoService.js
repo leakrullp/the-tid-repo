@@ -3,12 +3,10 @@ import Parse from "parse";
 const TodoItem = Parse.Object.extend("TodoItem");
 
 function toPlainObject(parseObject) {
-  const owner = parseObject.get("owner");
   return {
     id: parseObject.id,
     text: parseObject.get("text"),
     done: parseObject.get("done"),
-    owner: owner ? owner.id : null,
   };
 }
 
@@ -23,7 +21,6 @@ export async function createTodo(text) {
   const item = new TodoItem();
   item.set("text", text);
   item.set("done", false);
-  item.set("owner", Parse.User.current());
   return toPlainObject(await item.save());
 }
 
